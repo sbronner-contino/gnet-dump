@@ -1,0 +1,23 @@
+language: minimal
+
+services:
+- docker
+
+stages:
+- name: deploy
+  if: branch = master
+
+env:
+  global:
+    - COMMIT=${TRAVIS_COMMIT::7}
+    - secure: "TKGIWyIJGDJ2xPAU7N9vCsku6tgYfbGi8G9imazxI2yjV3QRRYVc+OwJAIv5lTWrjLB8rKH6BpeWhyTXEKo7hgHm2lPPT/PTlbPjWxlQbPhN23Au3n0A4RytOyWqgwsG3ixuZEuiqQmNdvnHbfW+UJIrM4hRdyDVOiBFIG88j9u9YyGrdY5oUqyUplilG5htBv+HwcNuqPi21iUORRi+Mz0RNmqSOb4JxQd8myldMtmn8VuKm2iYr0I2qRhepdnKbjOFBCoymo8/l7S9VidmUmllBynVsP8Ehv3iBe+KzsFWDNHs0hfHg9kyAZRh0xMesCQ0y5giDNZVFJWbr/pqf6/HdflTsVIZjJSqJkhW0C8OYzCKIkwOjeuGj9sWqVg5TMu9GNLeETQ8s+1/zy8YCC+kYoZoZ8VZeqDSopgbMSpc84fataoZhXb75uVC+F+wEq40p6KkHE7r9J9uwPlrMRbdkQ/x9FvSizPDVqJqvOWPyx99oz9hEkONtg64ckkYFX+EHgFCxhfkLBgPDwXXLswqVU9haeujCsXotHtzMossmpsUrAv2CLVadRB6QnYqgk3aJnzXKSgU5J2XQEB/9tciDDEbQJuoacFrpw3Fy58G4ptAumPPSFxE+uZR403Ufg6rB78qYidBxTF2yw23xDj7nxHdB7LoO0r2GjfisM8=" # Docker Password (DOCKER_PASS)
+
+jobs:
+  include:
+    - stage: deploy
+      script:
+      - docker login -u csbronner -p $DOCKER_PASSWORD
+      - export REPO=csbronner/gnet-dump
+      - docker build -f Dockerfile -t $REPO:$COMMIT .
+      - docker tag $REPO:$COMMIT $REPO:latest
+      - docker push $REPO

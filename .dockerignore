@@ -1,0 +1,9 @@
+bin
+.vscode
+.git
+.gitignore
+obj
+*json
+Dockerfile
+.travis.yml
+published
