@@ -4,11 +4,11 @@ An application to export GCP networks & subnets to a json file.
 
 # Pre-requisites
 
-You must be able to generate an auth token sourced from an authorised GCP account. The easier way to do that is to [install the gcloud tools](https://cloud.google.com/sdk/docs/quickstarts) and log in.
+You must be able to generate an access token sourced from an authorised GCP account. The easier way to do that is to [install the gcloud tools](https://cloud.google.com/sdk/docs/quickstarts) and log in.
 
 # How to Run
 
-The following will output the network configuration for the example project to the example-project-networks.json file.
+The following will output the network configuration for the _example-project_ to the example-project-networks.json file.
 
 ```
 docker run -it -v $(pwd):/output csbronner/gnet-dump \
@@ -18,7 +18,7 @@ docker run -it -v $(pwd):/output csbronner/gnet-dump \
     --output-file /output/example-project-networks.json
 ```
 
-If you have a proxy between your host and the gcp api endpoints:
+If you have a proxy between your host and the gcp api endpoints, pass the __HTTPS_PROXY__ environment variable:
 
 ```
 docker run -it -v $(pwd):/output csbronner/gnet-dump \
@@ -29,7 +29,7 @@ docker run -it -v $(pwd):/output csbronner/gnet-dump \
     --output-file /output/example-project-networks.json
 ```
 
-For all projects accessible by the user identified by the passed auth token, leave off the --project-id option.
+For all projects accessible by the user identified by the passed access token, leave off the _--project-id_ option.
 
 ```
 docker run -it -v $(pwd):/output csbronner/gnet-dump \
