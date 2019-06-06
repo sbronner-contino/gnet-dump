@@ -4,7 +4,7 @@ An application to export GCP networks & subnets to a json file.
 
 # Pre-requisites
 
-You must be able to generate an auth token sourced from an authorised GCP account. The easier way to do that is to (https://cloud.google.com/sdk/docs/quickstarts)[install the gcloud tools] and log in.
+You must be able to generate an auth token sourced from an authorised GCP account. The easier way to do that is to [install the gcloud tools](https://cloud.google.com/sdk/docs/quickstarts) and log in.
 
 # How to Run
 
